@@ -1,5 +1,6 @@
 module Parser where
 
+import Control.Applicative ((*>), (<*), (<*>), (<$>))
 import Exp (Exp(..))
 import Data.Text (Text)
 import qualified Data.Attoparsec.Text as Parser
@@ -11,30 +12,27 @@ numberParser = do
   return $ Number number
 
 parenParser :: Parser.Parser Exp
-parenParser = do
-  Parser.skipSpace
-  Parser.char '('
-  inner <- expParser
+parenParser =
+  Parser.skipSpace *>
+  Parser.char '('  *>
+  expParser        <*
   Parser.char ')'
-  return inner
 
 sumParser :: Parser.Parser Exp
-sumParser = do
-  exp1 <- Parser.choice [parenParser, numberParser]
-  Parser.skipSpace
-  Parser.char '+'
-  Parser.skipSpace
-  exp2 <- Parser.choice [parenParser, numberParser]
-  return $ Sum exp1 exp2
+sumParser =
+  Sum <$> Parser.choice [parenParser, numberParser]
+      <*> (Parser.skipSpace
+           *> Parser.char '+'
+           *> Parser.skipSpace
+           *> Parser.choice [parenParser, numberParser])
 
 prodParser :: Parser.Parser Exp
-prodParser = do
-  exp1 <- Parser.choice [parenParser, numberParser]
-  Parser.skipSpace
-  Parser.char '*'
-  Parser.skipSpace
-  exp2 <- Parser.choice [parenParser, numberParser]
-  return $ Prod exp1 exp2
+prodParser =
+  Prod <$> Parser.choice [parenParser, numberParser]
+       <*> (Parser.skipSpace
+            *> Parser.char '*'
+            *> Parser.skipSpace
+            *> Parser.choice [parenParser, numberParser])
 
 
 expParser :: Parser.Parser Exp
