@@ -1,5 +1,6 @@
 module Parser where
 
+import Exp (Exp(..))
 import Data.Text (Text)
 import qualified Data.Attoparsec.Text as Parser
 
