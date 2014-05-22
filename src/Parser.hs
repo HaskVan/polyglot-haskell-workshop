@@ -4,24 +4,44 @@ import Exp (Exp(..))
 import Data.Text (Text)
 import qualified Data.Attoparsec.Text as Parser
 
-data Exp
-  = Sum Exp Exp
-  | Prod Exp Exp
-  | Number Int
-  deriving (Show, Eq, Ord)
-
-
 numberParser :: Parser.Parser Exp
-numberParser = undefined
-               
+numberParser = do
+  Parser.skipSpace
+  number <- Parser.decimal
+  return $ Number number
+
+parenParser :: Parser.Parser Exp
+parenParser = do
+  Parser.skipSpace
+  Parser.char '('
+  inner <- expParser
+  Parser.char ')'
+  return inner
+
 sumParser :: Parser.Parser Exp
-sumParser = undefined
-            
+sumParser = do
+  exp1 <- Parser.choice [parenParser, numberParser]
+  Parser.skipSpace
+  Parser.char '+'
+  Parser.skipSpace
+  exp2 <- Parser.choice [parenParser, numberParser]
+  return $ Sum exp1 exp2
+
 prodParser :: Parser.Parser Exp
-prodParser = undefined
+prodParser = do
+  exp1 <- Parser.choice [parenParser, numberParser]
+  Parser.skipSpace
+  Parser.char '*'
+  Parser.skipSpace
+  exp2 <- Parser.choice [parenParser, numberParser]
+  return $ Prod exp1 exp2
+
 
 expParser :: Parser.Parser Exp
-expParser = undefined
+expParser = Parser.choice [ sumParser
+                          , prodParser
+                          , parenParser
+                          , numberParser]
 
 parseExp :: Text -> Either String Exp
 parseExp = Parser.parseOnly expParser
