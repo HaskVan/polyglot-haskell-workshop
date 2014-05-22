@@ -61,7 +61,8 @@ executable haskell-workshop
     base       >=4.6  && <4.8,
     attoparsec >=0.11 && <0.12,
     text       >=1.1  && <1.2,
-    aeson      >=0.7  && <0.8
+    aeson      >=0.7  && <0.8,
+    scientific >=0.3  && <0.4
 
   -- Directories containing source files.
   hs-source-dirs: src
@@ -80,6 +81,7 @@ test-suite haskell-workshop-testsuite
     attoparsec >=0.11 && <0.12,
     text       >=1.1  && <1.2,
     aeson      >=0.7  && <0.8,
+    scientific >=0.3  && <0.4,
 
     -- test dependencies
     hspec      >=1.9 && <1.10,
@@ -96,6 +98,7 @@ executable haskell-workshop-testloop
     attoparsec >=0.11 && <0.12,
     text       >=1.1  && <1.2,
     aeson      >=0.7  && <0.8,
+    scientific >=0.3  && <0.4,
 
     -- test dependencies
     hspec      >=1.9 && <1.10,
