@@ -58,7 +58,8 @@ executable haskell-workshop
 
   -- Other library packages from which modules are imported.
   build-depends:
-    base >=4.6 && <4.8
+    base >=4.6 && <4.8,
+    attoparsec >=0.11 && <0.12
 
   -- Directories containing source files.
   hs-source-dirs: src
@@ -74,6 +75,7 @@ test-suite haskell-workshop-testsuite
   build-depends:
     -- dev dependencies
     base  >=4.6 && <4.8,
+    attoparsec >=0.11 && <0.12,
 
     -- test dependencies
     hspec >=1.9 && <1.10,
@@ -86,6 +88,7 @@ executable haskell-workshop-testloop
   build-depends:
     -- dev dependencies
     base  >=4.6 && <4.8,
+    attoparsec >=0.11 && <0.12,
 
     -- test dependencies
     hspec >=1.9 && <1.10,

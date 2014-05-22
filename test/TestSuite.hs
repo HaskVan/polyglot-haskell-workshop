@@ -1,6 +1,7 @@
 module Main where
 
 import Foo (foo)
+import qualified ParserTest
 
 import Control.Monad (void)
 
@@ -13,6 +14,7 @@ main = void $ hspecResult specs
 
 specs :: Spec
 specs = do
-  describe "foo example" $
+  describe "foo example" $ do
     it "must return foo" $
      assertEqual "foo should equal foo" "foo" foo
+    ParserTest.tests
