@@ -48,7 +48,7 @@ cabal-version:       >=1.10
 
 executable haskell-workshop
   -- .hs or .lhs file containing the Main module.
-  main-is:             Main.hs
+  main-is: Main.hs
 
   -- Modules included in this executable, other than Main.
   -- other-modules:
@@ -57,10 +57,21 @@ executable haskell-workshop
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.6 && <4.7
+  build-depends:
+    base >=4.6 && <4.8
 
   -- Directories containing source files.
-  -- hs-source-dirs:
+  hs-source-dirs: src
 
   -- Base language which the package is written in.
   default-language:    Haskell2010
+
+test-suite haskell-workshop-tests
+  type: exitcode-stdio-1.0
+  main-is: DocTest.hs
+  hs-source-dirs: src, test
+  build-depends:
+    base    >=4.6 && <4.8,
+    Glob    >=0.7 && <0.8,
+    doctest >=0.9 && <0.10
+  default-language: Haskell2010
