@@ -1,6 +1,7 @@
 module Main where
 
-import Foo
+import Web.Scotty (scotty)
+import Server (server)
 
 main :: IO ()
-main = putStrLn foo
+main = scotty 3000 server
