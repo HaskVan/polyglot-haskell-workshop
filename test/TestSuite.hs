@@ -2,6 +2,7 @@ module Main where
 
 import Foo (foo)
 import qualified ParserTest
+import qualified JSONTest
 
 import Test.Hspec.Runner (hspec)
 import Test.Hspec (describe, it, Spec)
@@ -16,3 +17,4 @@ specs = do
     $ it "must return foo"
       $ assertEqual "foo should equal foo" "foo" foo
   ParserTest.tests
+  JSONTest.tests

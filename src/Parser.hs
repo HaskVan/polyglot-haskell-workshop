@@ -1,9 +1,10 @@
 module Parser where
 
 import Control.Applicative ((*>), (<*), (<*>), (<$>))
-import Exp (Exp(..))
 import Data.Text (Text)
 import qualified Data.Attoparsec.Text as Parser
+
+import Types
 
 numberParser :: Parser.Parser Exp
 numberParser = do

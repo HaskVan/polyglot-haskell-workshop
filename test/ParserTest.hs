@@ -1,23 +1,16 @@
 {-# LANGUAGE OverloadedStrings #-}
 module ParserTest where
 
-import Control.Monad (liftM, ap)
-
 import Parser (numberParser, sumParser, prodParser, parenParser, expParser)
-import Exp (eval, Exp(..))
+import Exp (eval)
 import qualified Data.Attoparsec.Text as Parser
 
-import Test.Hspec (describe, it, pending, Spec)
+import Test.Hspec (describe, it, Spec)
 import Test.Hspec.QuickCheck (prop)
-import Test.QuickCheck (Arbitrary(..), Gen(..), frequency)
 import Test.HUnit (assertEqual)
 
-instance Arbitrary Exp where
-  arbitrary =
-    frequency [ (50, Number `liftM` arbitrary)
-              , (25, Sum    `liftM` arbitrary `ap` arbitrary)
-              , (25, Prod   `liftM` arbitrary `ap` arbitrary)
-              ]
+import Types
+import TestTypes ()
 
 tests :: Spec
 tests = do
