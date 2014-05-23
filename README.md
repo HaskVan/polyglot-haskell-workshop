@@ -1,4 +1,4 @@
-= Vancouver Polyglot Haskell Workshop
+# Vancouver Polyglot Haskell Workshop
 
 This project is intended to serve as a guide to teaching basics of
 Haskell + some _real world_ bits.
