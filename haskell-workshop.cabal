@@ -65,7 +65,10 @@ executable haskell-workshop
     scientific   >=0.3  && <0.4,
     scotty       >=0.7  && <0.8,
     blaze-markup >=0.6  && <0.7,
-    blaze-html   >=0.7  && <0.8
+    blaze-html   >=0.7  && <0.8,
+    vector       >=0.10 && <0.11,
+    stm          >=2.4  && <2.5,
+    async        >=2.0  && <2.1
 
   -- Directories containing source files.
   hs-source-dirs: src
@@ -88,6 +91,9 @@ test-suite haskell-workshop-testsuite
     scotty       >=0.7  && <0.8,
     blaze-markup >=0.6  && <0.7,
     blaze-html   >=0.7  && <0.8,
+    vector       >=0.10 && <0.11,
+    stm          >=2.4  && <2.5,
+    async        >=2.0  && <2.1,
 
     -- test dependencies
     hspec      >=1.9 && <1.10,
@@ -108,6 +114,9 @@ executable haskell-workshop-testloop
     scotty       >=0.7  && <0.8,
     blaze-markup >=0.6  && <0.7,
     blaze-html   >=0.7  && <0.8,
+    vector       >=0.10 && <0.11,
+    stm          >=2.4  && <2.5,
+    async        >=2.0  && <2.1,
 
     -- test dependencies
     hspec      >=1.9 && <1.10,
