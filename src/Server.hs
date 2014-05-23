@@ -16,13 +16,40 @@ import Exp.JSON ()
 import Exp.Param ()
 
 processJSON :: ScottyM ()
-processJSON = undefined
+processJSON = Web.post "/exp.json" $ do
+  expression <- Web.jsonData
+  Web.json
+    $ Aeson.object [ "expression" .= (expression :: Exp)
+                   , "eval"       .= eval expression ]
 
 renderForm :: ScottyM ()
-renderForm = undefined
+renderForm = Web.get "/exp" $
+  Web.raw
+    $ renderHtml
+    $ H.docTypeHtml $ do
+      H.head $
+       H.title "Exp Evaluator"
+
+      H.body $
+        H.form ! A.method "POST"
+               ! A.action "/exp" $ do
+
+          H.label ! A.for "exp" $ "Introduce Expression"
+
+          H.input ! A.type_ "text"
+                  ! A.id "exp"
+                  ! A.name  "exp"
+
+          H.input ! A.type_ "submit"
 
 processForm :: ScottyM ()
-processForm = undefined
+processForm = Web.post "/exp" $ do
+  expression <- Web.param "exp"
+  Web.setHeader "Content-Type" "text/plain"
+  Web.raw
+    $ Aeson.encode
+    $ Aeson.object [ "expression" .= (expression :: Exp)
+                   , "eval"       .= eval expression ]
 
 server :: ScottyM ()
 server = do

@@ -9,4 +9,7 @@ import Types (Exp(..))
 import Parser (parseExp)
 
 instance Parsable Exp where
-  parseParam = undefined
+  parseParam input =
+    case parseExp (mconcat $ toChunks input) of
+      Right result -> Right result
+      Left err     -> Left $ pack err
