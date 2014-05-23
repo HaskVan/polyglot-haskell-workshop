@@ -1,2 +1,6 @@
 :set -isrc -itest
 :set -Wall
+
+:m + System.IO
+hSetBuffering stdout LineBuffering
+:m - System.IO
